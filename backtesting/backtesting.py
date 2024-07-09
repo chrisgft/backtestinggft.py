@@ -783,7 +783,7 @@ class _Broker:
         Long/short `price`, adjusted for commisions.
         In long positions, the adjusted price is a fraction higher, and vice versa.
         """
-        if (price < 0 or self.last_price < 0):
+        if (price and price < 0 or self.last_price < 0):
             temp_value = (price or self.last_price) * (1 + copysign(self._commission, size))
             return (price or self.last_price) - (abs((price or self.last_price)) + temp_value)
         else:
